@@ -1,11 +1,19 @@
 from google.cloud import storage
-from file_converter import mp42wav, wav2mid
-from pytubefix import YouTube
 from google.cloud.storage.bucket import Bucket 
+from pytubefix import YouTube
+from file_converter import mp42wav, wav2mid
 import os
 
 class GCS(object):
+    """
+    Custom GCS Object for efficient structure
+    """
+    
     def __init__(self):
+        """
+        Initializes GCS object.
+        """
+        
         self.storage_client = storage.Client()
         self.wav_bucket = self.storage_client.bucket('muzik_wav')
         self.midi_bucket = self.storage_client.bucket('muzik_midi')
@@ -17,6 +25,7 @@ class GCS(object):
         """
         refeshes blob counts for buckets
         """
+        
         self.wav_blob_count = self.get_blob_count(self.wav_bucket)
         self.midi_blob_count = self.get_blob_count(self.midi_bucket)
         
