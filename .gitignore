@@ -1,2 +1,4 @@
-data
-credentials
+main/data
+main/credentials
+.vscode
+__pycache__
