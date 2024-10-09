@@ -27,7 +27,7 @@ def get_video_links(genre: str = 'lofi hip hop', num_videos: int = 100) -> List[
                 hour = int(duration.split(':')[0])
                 minute = int(duration.split(':')[1])
 
-                if hour == 1:
+                if hour <= 1 and 30 <= minute:
                   video_links.append(f"https://www.youtube.com/watch?v={video['id']}")
                   progress_bar.update(1)
 
