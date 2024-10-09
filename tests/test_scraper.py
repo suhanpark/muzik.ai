@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from ..utils.scraper import get_video_links
+from ..tools.utils import get_video_links
 
 
 class TestScraper(unittest.TestCase):

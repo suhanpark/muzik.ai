@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from ..utils.file_converter import mp42wav, wav2mid
+from utils.file_converter import mp42wav, wav2mid
 
 sample_dir = 'data/sample'
 
