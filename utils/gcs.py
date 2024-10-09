@@ -1,7 +1,7 @@
 from google.cloud import storage
 from google.cloud.storage.bucket import Bucket 
 from pytubefix import YouTube
-from file_converter import mp42wav, wav2mid
+from .file_converter import mp42wav, wav2mid
 import os
 
 class GCS(object):

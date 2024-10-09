@@ -1,5 +1,7 @@
 import unittest
 from unittest.mock import patch, MagicMock
+import sys
+sys.path.append('../muzik.ai')
 from utils.file_converter import mp42wav, wav2mid
 
 sample_dir = 'data/sample'
