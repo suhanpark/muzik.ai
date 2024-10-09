@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from ..utils.gather_data import gather_audio_data
-from ..utils.gcs import GCS
+from utils.gather_data import gather_audio_data
+from utils.gcs import GCS
 
 class TestGatherData(unittest.TestCase):
 
