@@ -14,6 +14,7 @@ def gather_audio_data(db: GCS) -> str:
     db.blob_count_refresh()
     
     video_links = get_video_links()
+    print(f"\nTotal Video Links: {len(video_links)}\n")
     
     for link in tqdm(video_links, desc='Uploading files to GCS'):
         db.upload_audio_files(link)

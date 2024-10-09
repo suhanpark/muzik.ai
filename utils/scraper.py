@@ -11,6 +11,8 @@ def get_video_links(genre: str = 'lofi hip hop', num_videos: int = 100) -> List[
     video_links = []
     videos_search = VideosSearch(genre, limit=15)  # Fetch 15 results per page
 
+    progress_bar = tqdm(total=num_videos)
+
     while len(video_links) < num_videos:
         results = videos_search.result()['result']
 
@@ -26,6 +28,7 @@ def get_video_links(genre: str = 'lofi hip hop', num_videos: int = 100) -> List[
 
                 if hour == 1 and minute <= 30:
                   video_links.append(f"https://www.youtube.com/watch?v={video['id']}")
+                  progress_bar.update(1)
 
                   if len(video_links) >= num_videos:
                       break
@@ -35,4 +38,6 @@ def get_video_links(genre: str = 'lofi hip hop', num_videos: int = 100) -> List[
             # Move to the next page of search results
             videos_search.next() 
 
+    progress_bar.close()
+    
     return video_links
