@@ -1,5 +1,5 @@
-from .gcs import GCS
-from .scraper import get_video_links
+from gcs import GCS
+from scraper import get_video_links
 from tqdm import tqdm
 
 def gather_audio_data(db: GCS) -> str:

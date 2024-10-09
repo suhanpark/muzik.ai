@@ -1,4 +1,6 @@
-main/data
-main/credentials
+data
+credentials
 .vscode
 __pycache__
+*.tar
+google-cloud-sdk
