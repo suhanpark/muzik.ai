@@ -1,4 +1,5 @@
 from typing import List
+from tqdm import tqdm
 from youtubesearchpython import VideosSearch
 
 def get_video_links(genre: str = 'lofi hip hop', num_videos: int = 100) -> List[str]:
@@ -11,7 +12,7 @@ def get_video_links(genre: str = 'lofi hip hop', num_videos: int = 100) -> List[
     video_links = []
     videos_search = VideosSearch(genre, limit=15)  # Fetch 15 results per page
 
-    progress_bar = tqdm(total=num_videos)
+    progress_bar = tqdm(total=num_videos, desc='Collecting Video Links')
 
     while len(video_links) < num_videos:
         results = videos_search.result()['result']
@@ -26,7 +27,7 @@ def get_video_links(genre: str = 'lofi hip hop', num_videos: int = 100) -> List[
                 hour = int(duration.split(':')[0])
                 minute = int(duration.split(':')[1])
 
-                if hour == 1 and minute <= 30:
+                if hour == 1:
                   video_links.append(f"https://www.youtube.com/watch?v={video['id']}")
                   progress_bar.update(1)
 

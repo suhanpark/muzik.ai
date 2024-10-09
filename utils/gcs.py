@@ -30,7 +30,7 @@ class GCS(object):
         self.midi_blob_count = self.get_blob_count(self.midi_bucket)
         
         print(f"WAV Blob Count Refreshed: {self.wav_blob_count}")
-        print(f"MIDI Blob Count Refreshed: {self.midi_blob_count}")
+        print(f"MIDI Blob Count Refreshed: {self.midi_blob_count}\n")
     
     def get_blob_count(self, bucket: Bucket, prefix: str = None) -> int:
         """
