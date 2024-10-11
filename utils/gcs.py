@@ -46,7 +46,6 @@ class GCS(object):
 
         # Count the number of files (blobs)
         file_count = len(list(blobs))
-
         return file_count
 
     def to_bucket(self, bucket: Bucket, source_file_path: str, destination_blob_name: str) -> None:
@@ -89,25 +88,23 @@ class GCS(object):
         final_wav_file = os.path.join(wav_folder, wav_filename)
         mp42wav(downloaded_file, final_wav_file)
         
-        # remove converted file to save storage
-        os.remove(downloaded_file)
-        
-        self.to_bucket(self.wav_bucket, final_wav_file, wav_filename)
-        self.wav_blob_count += 1
-        
         midi_folder = os.path.join(output_path, 'midi_audio')
         os.makedirs(midi_folder, exist_ok=True)
         
         midi_filename = f"{title}.mid"
         final_midi_file = os.path.join(midi_folder, midi_filename)
-        wav2mid(final_wav_file, final_midi_file)
+        wav2mid(final_wav_file, midi_folder)
         
-        # remove converted file to save storage
-        os.remove(final_wav_file)
-
+        self.to_bucket(self.wav_bucket, final_wav_file, wav_filename)
+        self.wav_blob_count += 1
+        
         self.to_bucket(self.midi_bucket, final_midi_file, midi_filename)
         self.midi_blob_count += 1
         
         # remove converted file to save storage
+        os.remove(downloaded_file)
+        os.remove(final_wav_file)
         os.remove(final_midi_file)
+        
+        return
         
