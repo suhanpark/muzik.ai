@@ -40,6 +40,7 @@ def extract_melody_from_wav(wav_file):
     :param _type_ wav_file: wav file
     :return _type_: pitch values
     """
+    
     # Load the audio file
     loader = es.MonoLoader(filename=wav_file)
     audio = loader()
@@ -72,6 +73,7 @@ def convert_to_midi(pitch_values, output_midi_file):
     :param _type_ pitch_values: pitch values from wav
     :param _type_ output_midi_file: .mid file
     """
+    
     # Create a new MIDI file
     midi = MidiFile()
     track = MidiTrack()
@@ -85,4 +87,10 @@ def convert_to_midi(pitch_values, output_midi_file):
             track.append(msg)
 
     # Save the MIDI file
-    midi.save(output_midi_file)
+    try:
+        print(output_midi_file)
+        midi.save(output_midi_file)
+    except Exception as e:
+        print(f"Error during MIDI conversion: {e}")
+        return
+

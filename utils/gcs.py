@@ -90,10 +90,10 @@ class GCS(object):
         
         midi_folder = os.path.join(output_path, 'midi_audio')
         os.makedirs(midi_folder, exist_ok=True)
-        
+
         midi_filename = f"{title}.mid"
         final_midi_file = os.path.join(midi_folder, midi_filename)
-        wav2mid(final_wav_file, midi_folder)
+        wav2mid(final_wav_file, final_midi_file)
         
         self.to_bucket(self.wav_bucket, final_wav_file, wav_filename)
         self.wav_blob_count += 1

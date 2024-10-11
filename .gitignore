@@ -1,4 +1,4 @@
-data
+data/*
 credentials/*
 .vscode
 __pycache__
