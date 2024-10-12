@@ -88,9 +88,15 @@ def convert_to_midi(pitch_values, output_midi_file):
 
     # Save the MIDI file
     try:
-        print(output_midi_file)
         midi.save(output_midi_file)
     except Exception as e:
         print(f"Error during MIDI conversion: {e}")
         return
 
+# def wav2mid_bp(wav_path: str, midi_folder: str):
+#     try:
+#         command = ['basic-pitch', midi_folder, wav_path]
+#         subprocess.run(command, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+#     except Exception as e:
+#         print(f"Error during MIDI conversion: {e}")
+#         return

@@ -2,7 +2,7 @@ from typing import List
 from tqdm import tqdm
 from youtubesearchpython import VideosSearch
 
-def get_video_links(genre: str = 'lofi hip hop', num_videos: int = 100) -> List[str]:
+def get_video_links(genre: str = 'lofi jazz', num_videos: int = 100) -> List[str]:
     """
     Get a list of YouTube video links for lofi hip-hop that are not live.
 
@@ -25,8 +25,9 @@ def get_video_links(genre: str = 'lofi hip hop', num_videos: int = 100) -> List[
               duration = video.get('duration')
               if duration:
                 hour = int(duration.split(':')[0])
+                minute = int(duration.split(':')[1])
 
-                if hour <= 2:
+                if hour < 1 and minute >= 20:
                   video_links.append(f"https://www.youtube.com/watch?v={video['id']}")
                   progress_bar.update(1)
 

@@ -3,4 +3,5 @@ credentials/*
 .vscode
 __pycache__
 *.tar
+*.gz
 google-cloud-sdk
