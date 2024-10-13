@@ -1,7 +1,7 @@
 from google.cloud import storage
 from google.cloud.storage.bucket import Bucket 
 from pytubefix import YouTube
-from file_converter import mp42wav, wav2mid
+from file_converter import mp42wav, wav2mid, wav2mid_bp
 import os
 
 class GCS(object):
@@ -93,7 +93,8 @@ class GCS(object):
 
         midi_filename = f"{title}.mid"
         final_midi_file = os.path.join(midi_folder, midi_filename)
-        wav2mid(final_wav_file, final_midi_file)
+        # wav2mid(final_wav_file, final_midi_file)
+        wav2mid_bp(final_wav_file, midi_folder)
         
         self.to_bucket(self.wav_bucket, final_wav_file, wav_filename)
         self.wav_blob_count += 1

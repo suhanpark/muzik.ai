@@ -1,6 +1,7 @@
 import subprocess
 import essentia.standard as es
 import numpy as np
+import os
 from mido import MidiFile, MidiTrack, Message
 
 def mp42wav(mp4_file: str, output_audio_file: str):
@@ -93,10 +94,12 @@ def convert_to_midi(pitch_values, output_midi_file):
         print(f"Error during MIDI conversion: {e}")
         return
 
-# def wav2mid_bp(wav_path: str, midi_folder: str):
-#     try:
-#         command = ['basic-pitch', midi_folder, wav_path]
-#         subprocess.run(command, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-#     except Exception as e:
-#         print(f"Error during MIDI conversion: {e}")
-#         return
+def wav2mid_bp(wav_path: str, midi_folder: str):
+    try:
+        command = ['basic-pitch', midi_folder, wav_path]
+        subprocess.run(command, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        title = wav_path.split('/')[-1].replace('.wav', '')
+        os.rename(f'{midi_folder}/{title}_basic_pitch.mid', f'{midi_folder}/{title}.mid')
+    except Exception as e:
+        print(f"Error during MIDI conversion: {e}")
+        return
