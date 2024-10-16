@@ -5,3 +5,4 @@ __pycache__
 *.tar
 *.gz
 google-cloud-sdk
+.DS_Store
