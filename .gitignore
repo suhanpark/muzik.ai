@@ -1,4 +1,7 @@
-data/*
+data/midi_audio/*
+data/wav_audio/*
+data/preprocessed_audio/*
+data/generated_audio/*
 credentials/*
 .vscode
 __pycache__
