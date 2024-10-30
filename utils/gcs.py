@@ -21,6 +21,29 @@ class GCS(object):
         self.wav_blob_count = self.get_blob_count(self.wav_bucket)
         self.midi_blob_count = self.get_blob_count(self.midi_bucket)
     
+    def __getstate__(self):
+        """
+        Prepares the object for pickling by excluding non-serializable attributes.
+        """
+        
+        state = self.__dict__.copy()
+        # Exclude non-serializable attributes
+        del state['storage_client']
+        del state['wav_bucket']
+        del state['midi_bucket']
+        return state
+
+    def __setstate__(self, state):
+        """
+        Restores the object after unpickling and reinitializes excluded attributes.
+        """
+        
+        self.__dict__.update(state)
+        # Reinitialize non-serializable attributes
+        self.storage_client = storage.Client()
+        self.wav_bucket = self.storage_client.bucket('muzik_wav')
+        self.midi_bucket = self.storage_client.bucket('muzik_midi')
+    
     def blob_count_refresh(self) -> None:
         """
         refeshes blob counts for buckets
@@ -108,4 +131,19 @@ class GCS(object):
         os.remove(final_midi_file)
         
         return
+    
+    def download_midi(self) -> str:
+        '''
+        Downloads midi files from GCS
+        '''
         
+        data_path = 'data/midi_audio'
+        
+        # List all the blobs (files) in the bucket
+        blobs_list = list(self.midi_bucket.list_blobs())
+
+        for blob in blobs_list:
+            b = self.midi_bucket.blob(blob.name)
+            b.download_to_filename(f'{data_path}/{blob.name}')
+            
+        return f'midi files downloaded to {data_path}'
